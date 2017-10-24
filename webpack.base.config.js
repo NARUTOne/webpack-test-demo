@@ -11,7 +11,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 var baseConfig = {
 	target: 'web', //构建目标
 	entry: {
-		app: 'src/index.js'
+		app: './src/index.js'
 	},
 	output: {
 		path: path.resolve(__dirname, 'dist'),
@@ -31,6 +31,14 @@ var baseConfig = {
 	    {
         test: /\.json$/,
         loader: 'json-loader'
+      },
+      {
+        test: /\.css$/,
+        use: [{
+            loader: "style-loader" // creates style nodes from JS strings
+        }, {
+            loader: "css-loader" // translates CSS into CommonJS
+        }]
       },
       {
         test: /\.less$/,
@@ -60,7 +68,7 @@ var baseConfig = {
     }
 	},
 	plugins:[
-	 	new CleanWebpackPlugin(['dist']), // 清除 测试dist
+	 	//new CleanWebpackPlugin(['dist']), // 清除 测试dist
 		new webpack.NoEmitOnErrorsPlugin() // 2.x以上；编译时出错，跳过，编译后保错
 	]
 }

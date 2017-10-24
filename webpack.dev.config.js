@@ -17,7 +17,7 @@ module.exports = merge.smart(baseConfig, {
 	cache: true,
 	devtool: 'source-map',
 	performance: {
-	  hints: "error"
+	  hints: false
 	},
 	plugins: [
 		new webpack.NamedModulesPlugin(), // 开发阶段，热加载HMR 显示相对路径
@@ -30,7 +30,7 @@ module.exports = merge.smart(baseConfig, {
     new webpack.HotModuleReplacementPlugin(), // 启用HMR
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: 'index.html',
+      template: path.resolve(__dirname, 'index.html'),
       inject: true,
     })
 	]

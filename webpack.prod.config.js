@@ -14,7 +14,7 @@ var FaviconsWebpackPlugin = require('favicons-webpack-plugin'); // webpack favic
 
 var baseWebpackConfig = require('./webpack.base.config');
 
-var prodConfig = merge.smart(baseConfig, {
+var prodConfig = merge.smart(baseWebpackConfig, {
 	devtool: false,
 	plugins: [
 		new webpack.DefinePlugin({
@@ -22,7 +22,7 @@ var prodConfig = merge.smart(baseConfig, {
     }),
     new webpack.optimize.UglifyJsPlugin({
       uglifyOptions: {
-        ie8: false, // IE9+
+        ie8: false, // IE9+ 
         output: {
           comments: false,
           beautify: false,
@@ -58,9 +58,9 @@ var prodConfig = merge.smart(baseConfig, {
     }),
     new FaviconsWebpackPlugin({
       // Your source logo
-      logo: 'logo.png',
+      logo: path.join(__dirname, 'public/logo.png'),
       // The prefix for all image files (might be a folder or a name)
-      prefix: path.join(config.build.assetsSubDirectory, 'icons/'),
+      prefix: path.join(__dirname, 'icons/'),
       // Emit all stats of the generated icons
       emitStats: false,
       // The name of the json containing all favicon information
@@ -73,7 +73,7 @@ var prodConfig = merge.smart(baseConfig, {
       // favicon background color (see https://github.com/haydenbleasel/favicons#usage)
       background: 'transparent',
       // favicon app title (see https://github.com/haydenbleasel/favicons#usage)
-      title: config.title,
+      title: 'SYSTEM NAME',
       // which icons should be generated (see https://github.com/haydenbleasel/favicons#usage)
       icons: {
         android: false,

@@ -68,7 +68,7 @@ var baseConfig = {
     }
 	},
 	plugins:[
-	 	//new CleanWebpackPlugin(['dist']), // 清除 测试dist
+	 	new CleanWebpackPlugin(['dist']), // 清除 测试dist
 		new webpack.NoEmitOnErrorsPlugin() // 2.x以上；编译时出错，跳过，编译后保错
 	]
 }

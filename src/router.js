@@ -4,7 +4,7 @@
 
 import React, {Component} from 'react'
 import { render } from 'react-dom'
-import { Router, Route, browserHistory} from 'react-router'
+import { Router, Route, IndexRedirect, browserHistory} from 'react-router'
 
 import App from './pages/app/'
 import Todo from './pages/todo/'
@@ -16,8 +16,9 @@ export default class RouterList extends Component{
 			<Router
     history={browserHistory}
   >
-    <Route path="/" component={App}>
-      <IndexRoute component={Todo} />
+    <Route path="/dist/" component={App}>
+      <IndexRedirect to="/dist/todo" />
+      <Route path='todo'  component={Todo} />
       <Route path="*" component={NotFound} />
     </Route>
   </Router>

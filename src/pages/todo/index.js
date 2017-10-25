@@ -6,7 +6,6 @@ class Todos extends Component {
 
   constructor() {
     super()
-    this.update = update.bind(this)
     this.state = {
       text: '',
       list: []

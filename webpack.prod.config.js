@@ -41,15 +41,16 @@ var prodConfig = merge.smart(baseWebpackConfig, {
       debug: false
     }),
     new ExtractTextPlugin({ // 提取出css模块，到公共文件.css
-      filename: path.join('dist', '[name].[contenthash:8].css'),
+      filename: '[name].[contenthash:8].css',
       allChunks: true,
       disable: false,
     }),
     new OfflinePlugin(),
     new HtmlWebpackPlugin({
-      filename: path.resolve(__dirname, './dist/index.html'),
-      template: './index.html',
+      filename: 'index.html',
+      template: path.resolve(__dirname, 'template.html'),
       inject: true, // 注入
+      favicon: path.join(__dirname, 'public/logo.png'),
       minify: {
         removeComments: true, //带HTML注释
         collapseWhitespace: true, //文本节点出现的空白而崩溃

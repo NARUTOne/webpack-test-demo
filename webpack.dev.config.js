@@ -25,13 +25,14 @@ module.exports = merge.smart(baseConfig, {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
     }), // 环境变量
 		new OpenBrowserPlugin({
-      url: `http://localhost:${port}`
+      url: `http://localhost:${port}/dist/`
     }),
     new webpack.HotModuleReplacementPlugin(), // 启用HMR
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: path.resolve(__dirname, 'index.html'),
+      template: path.resolve(__dirname, 'template.html'),
       inject: true,
+      favicon: path.join(__dirname, 'public/logo.png')
     })
 	]
 })

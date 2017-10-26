@@ -15,7 +15,7 @@ process.env.NODE_ENV = 'production';
 var spinner = ora('building for production...');
 spinner.start();
 
-rm(path.join('../', 'dist'), err => {
+rm(path.join(path.resove(__dirname), 'dist'), err => {
   if (err) throw err
   webpack(webpackConfig, function (err, stats) {
     spinner.stop()

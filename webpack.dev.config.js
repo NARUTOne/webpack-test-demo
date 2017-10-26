@@ -15,7 +15,7 @@ var port = process.env.PORT || 3001;
 
 module.exports = merge.smart(baseConfig, {
 	cache: true,
-	devtool: 'source-map',
+	devtool: '#cheap-module-eval-source-map',
 	performance: {
 	  hints: false
 	},
@@ -30,7 +30,7 @@ module.exports = merge.smart(baseConfig, {
     new webpack.HotModuleReplacementPlugin(), // 启用HMR
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: path.resolve(__dirname, 'index.html'),
+      template: 'index.html',
       inject: true,
       favicon: path.join(__dirname, 'public/logo.png')
     })

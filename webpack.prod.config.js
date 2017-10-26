@@ -48,7 +48,7 @@ var prodConfig = merge.smart(baseWebpackConfig, {
     new OfflinePlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: path.resolve(__dirname, 'template.html'),
+      template: path.resolve(__dirname, 'index.html'),
       inject: true, // 注入
       favicon: path.join(__dirname, 'public/logo.png'),
       minify: {

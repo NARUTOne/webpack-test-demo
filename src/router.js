@@ -14,14 +14,14 @@ export default class RouterList extends Component{
 	render() {
 		return (
 			<Router
-    history={browserHistory}
-  >
-    <Route path="/dist/" component={App}>
-      <IndexRedirect to="/dist/todo" />
-      <Route path='todo'  component={Todo} />
-      <Route path="*" component={NotFound} />
-    </Route>
-  </Router>
+        history={browserHistory}
+      >
+        <Route path="/" component={App}>
+          <IndexRedirect to="/todo" />
+          <Route path='todo'  component={Todo} />
+          <Route path="*" component={NotFound} />
+        </Route>
+      </Router>
 		)
 	}
 }

@@ -12,17 +12,20 @@ var WebpackConfig = require('../webpack.dev.config.js')
 
 var app = express()
 
-app.use(express.static(__dirname))
+//加载指定目录静态资源
+var resourcePath = path.resolve(__dirname, '../');
+app.use(express.static(resourcePath))
 
 app.use(webpackDevMiddleware(webpack(WebpackConfig), {
-  publicPath: path.join(__dirname, '/dist/'),
+  publicPath: WebpackConfig.output.publicPath,
   stats: {
     colors: true
   }
 }))
 
+//配置任何请求都转到index.html，而index.html会根据React-Router规则去匹配任何一个route
 app.get('*', function(req, res) {
-  res.sendFile(path.join(__dirname, 'index.html'))
+  res.sendFile(path.resolve(resourcePath, 'index.html'))
 })
 
 var port = process.argv.slice(2)[0] || 3001

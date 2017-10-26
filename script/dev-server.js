@@ -11,7 +11,8 @@ const options = {
 	hot: true,
   compress: true,
   historyApiFallback: true,
-  publicPath: '/dist/',
+  contentBase: path.resolve(__dirname,'dist'),
+  publicPath: devConfig.output.publicPat,
   host: 'localhost',
   watchOptions: {
     ignored: /node_modules/,

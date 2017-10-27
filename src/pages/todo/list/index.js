@@ -6,8 +6,8 @@ import './index.less'
 
 class List extends Component {
 
-  change(type, value) {
-    this.props.onChange(type, value)
+  change(type, index) {
+    this.props.onChange(type, index)
   }
 
   render() {
@@ -17,8 +17,8 @@ class List extends Component {
         {data.map((item, i) => (
           <li key={i}>
             {item}
-            <Icon stype="remove" onClick={() => {
-              this.change('splice', index)
+            <Icon type="remove" onClick={() => {
+              this.change('splice', i)
             }} />
           </li>
         ))}

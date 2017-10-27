@@ -2,11 +2,11 @@
  * webpack base config
  */
 
-
 var path = require('path');
 var webpack = require('webpack');
 
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var baseConfig = {
 	target: 'web', //构建目标
@@ -23,7 +23,8 @@ var baseConfig = {
 		rules:[
 			{
 	      test: /\.js$/,
-	      exclude: /(node_modules|bower_components)/,
+				exclude: /(node_modules|bower_components)/,
+				include: [path.resolve(__dirname,'src'), path.resolve(__dirname, "public")],
 	      use: {
 	        loader: 'babel-loader'
 	      }
@@ -33,25 +34,7 @@ var baseConfig = {
         loader: 'json-loader'
       },
       {
-        test: /\.css$/,
-        use: [{
-            loader: "style-loader" // creates style nodes from JS strings
-        }, {
-            loader: "css-loader" // translates CSS into CommonJS
-        }]
-      },
-      {
-        test: /\.less$/,
-        use: [{
-            loader: "style-loader" // creates style nodes from JS strings
-        }, {
-            loader: "css-loader" // translates CSS into CommonJS
-        }, {
-            loader: "less-loader" // compiles Less to CSS
-        }]
-      },
-      {
-				test: /\.(png|jpe?g|gif|svg|woff2?|eot|ttf|otf)(\?.*)?$/,
+				test: /\.(png|jpe?g|gif|svg|woff|woff2?|eot|ttf|otf)(\?.*)?$/,
 				use: [
           {
             loader: 'file-loader',
@@ -62,7 +45,7 @@ var baseConfig = {
 		]
 	},
 	resolve:{
-		extensions: ['.js', '.jsx', '.less'],
+		extensions: ['.js', '.jsx'],
     alias: {
       public: path.resolve(__dirname, './public'),
     }

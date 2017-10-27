@@ -14,11 +14,13 @@ process.env.NODE_ENV = 'production';
 
 var spinner = ora('building for production...');
 spinner.start();
-
-rm(path.join(path.resove(__dirname), 'dist'), err => {
+ 
+rm(path.join(path.resolve(__dirname), '../dist'), err => {
   if (err) throw err
+  console.log(chalk.cyan('build step 1'))
   webpack(webpackConfig, function (err, stats) {
     spinner.stop()
+    console.log(chalk.cyan('build step 2'))
     if (err) throw err
     process.stdout.write(stats.toString({
       colors: true,

@@ -18,6 +18,32 @@ module.exports = merge.smart(baseConfig, {
 	devtool: '#cheap-module-eval-source-map',
 	performance: {
 	  hints: false
+  },
+  module: {
+		rules:[
+        {
+            test: /\.css$/,
+            use: [{
+                loader: "style-loader" // creates style nodes from JS strings
+            }, {
+                loader: "css-loader" // translates CSS into CommonJS
+            },{
+                loader: 'postcss-loader'
+            }]
+        },
+        {
+            test: /\.less$/,
+            use: [{
+                loader: "style-loader" // creates style nodes from JS strings
+            }, {
+                loader: "css-loader" // translates CSS into CommonJS
+            },{
+                loader: 'postcss-loader'
+            }, {
+                loader: "less-loader" // compiles Less to CSS
+            }]
+        }
+		]
 	},
 	plugins: [
 		new webpack.NamedModulesPlugin(), // 开发阶段，热加载HMR 显示相对路径
@@ -30,7 +56,7 @@ module.exports = merge.smart(baseConfig, {
     new webpack.HotModuleReplacementPlugin(), // 启用HMR
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: 'index.html',
+      template: 'template.html',
       inject: true,
       favicon: path.join(__dirname, 'public/logo.png')
     })

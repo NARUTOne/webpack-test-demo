@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import List from './List'
+import {Input, Button } from 'antd'
 import './index.less'
 
 class Todos extends Component {
@@ -16,7 +17,7 @@ class Todos extends Component {
     const {list} = this.state
 
     list.splice(index, 1)
-
+    debugger
     this.setState({list})
   }
 
@@ -33,9 +34,11 @@ class Todos extends Component {
     const { text, list } = state
     return (
       <div className="todos">
-        <input onChange={e => this.setState({'text': e.target.value})}></input>
-        <button onClick={() => {this.handleAdd()}}>添加</button>
-        <List data={list} onChange={() => {this.handleListChange()}} />
+        <div className='todo-box'>
+          <Input onChange={e => this.setState({'text': e.target.value})}/>
+          <Button onClick={() => {this.handleAdd()}} type="primary">添加</Button>
+        </div>        
+        <List data={list} onChange={::this.handleListChange} />
       </div>
     )
   }

@@ -1,4 +1,4 @@
-import 'font-awesome/css/font-awesome.css'
+import 'font-awesome/less/font-awesome.less'
 import React from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'

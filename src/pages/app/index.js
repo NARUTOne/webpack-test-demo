@@ -1,18 +1,22 @@
 import React, { Component } from 'react'
-import Header from './header/'
+import {Link} from 'react-router'
+import Head from './header/'
 import Body from './body/'
-import Footer from './footer/'
-
+import Foot from './footer/'
+import {Layout, Breadcrumb} from 'antd'
 import './index.less'
 
 class App extends Component {
 
   render() {
-    const { children, routes } = this.props
-
+    const { children, routes, params, location } = this.props
+    // console.log(routes)
     let main = [
-      <Header key="header" />,
-      <Body key="body">{children}</Body>
+      <Head key="header" location={location}/>,
+      <Body key="body">
+        <Breadcrumb routes={routes} params={params} separator=">" />
+        {children}
+      </Body>
     ]
 
     // 登录页和 404 页不渲染 Header
@@ -24,10 +28,10 @@ class App extends Component {
     }
 
     return (
-      <div className="wrapper">
+      <Layout className="wrapper">
         {main}
-        <Footer />
-      </div>
+        <Foot />
+      </Layout>
     )
   }
 }

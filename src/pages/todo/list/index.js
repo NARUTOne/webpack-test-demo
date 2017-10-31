@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Icon from 'public/components/Icon'
+import {Icon, Timeline } from 'antd'
 
 import './index.less'
 
@@ -13,16 +13,16 @@ class List extends Component {
   render() {
     const { data } = this.props
     return (
-      <ul className="todos__list">
+      <Timeline className="todos__list">
         {data.map((item, i) => (
-          <li key={i}>
+          <Timeline.Item key={i}>
             {item}
-            <Icon type="remove" onClick={() => {
+            <Icon type="close" className='line-delete' onClick={() => {
               this.change('splice', i)
             }} />
-          </li>
+          </Timeline.Item>
         ))}
-      </ul>
+      </Timeline>
     )
   }
 }

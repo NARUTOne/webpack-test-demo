@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { browserHistory } from 'react-router'
+import { Layout } from 'antd'
 import './index.less'
+
+const { Content } = Layout
 
 class Body extends Component {
 
@@ -14,9 +17,9 @@ class Body extends Component {
   render() {
     const { children } = this.props
     return (
-      <div className="body">
+      <Content className="body">
         {children}
-      </div>
+      </Content>
     )
   }
 }

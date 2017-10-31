@@ -15,6 +15,9 @@ var OfflinePlugin = require('offline-plugin'); //离线缓存 体验
 var baseWebpackConfig = require('./webpack.base.config');
 
 var prodConfig = merge(baseWebpackConfig, {
+  entry: {
+    vendor: ['react', 'react-dom']
+  },
   devtool: false,
   module: {
 		rules:[
@@ -63,7 +66,7 @@ var prodConfig = merge(baseWebpackConfig, {
       }
     }),
     new ExtractTextPlugin({ // 提取出css模块，到公共文件.css
-      filename: 'css/[name].[contenthash].css',
+      filename: 'static/css/[name].[contenthash].css',
       disable: false,
       allChunks: true
     }),
@@ -83,6 +86,19 @@ var prodConfig = merge(baseWebpackConfig, {
         collapseWhitespace: true, //文本节点出现的空白而崩溃
         removeAttributeQuotes: true //删除属性引用
       }
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: ['vendor'],
+      minChunks: Infinity,
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      // ( 公共chunk(commnons chunk) 的名称)
+      name: "commons",
+      // ( 公共chunk 的文件名)
+      filename: "commons.[chunkhash:4].js",
+      children: true,
+      // (模块必须被 3个 入口chunk 共享)
+      minChunks: 3
     })
 	]
 });

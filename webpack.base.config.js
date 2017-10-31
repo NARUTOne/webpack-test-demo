@@ -15,9 +15,9 @@ var baseConfig = {
 	},
 	output: {
 		path: path.resolve(__dirname, 'dist'),
-		filename: '[name].[hash].js',
+		filename: 'static/js/[name].[hash].js',
 		publicPath: '/',  //按需加载或外部资源 url
-		chunkFilename: '[id].[chunkhash:8].js' //chunk生成的文件名
+		chunkFilename: 'static/js/[id].[chunkhash:8].js' //chunk生成的文件名
 	},
 	module: {
 		rules:[
@@ -38,7 +38,9 @@ var baseConfig = {
 				use: [
           {
             loader: 'file-loader',
-            options: {}
+            options: {
+            	name: 'static/media/[name].[hash:8].[ext]'
+            }
           }
         ]
       }
@@ -48,6 +50,7 @@ var baseConfig = {
 		extensions: ['.js', '.jsx'],
     alias: {
       public: path.resolve(__dirname, './public'),
+      src: path.resolve(__dirname, './src')
     }
 	},
 	plugins:[

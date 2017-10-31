@@ -5,10 +5,24 @@
 import React, {Component} from 'react'
 import { render } from 'react-dom'
 import { Router, Route, IndexRedirect, browserHistory} from 'react-router'
-
+import auth from 'src/utils/auth'
 import App from './pages/app/'
-import Todo from './pages/todo/'
-import NotFound from './pages/notFound/'
+
+// 用户登录验证
+function requireAuth(nextState, replace) {
+  const path = nextState.location.pathname
+  const loginPath = '/login'
+  
+  if (!auth.isLoginIn()) {
+    path !== loginPath && replace({
+      pathname: '/login',
+      state: {
+        referrer: path
+      }
+    })
+  }
+}
+
 
 export default class RouterList extends Component{
 	render() {
@@ -16,10 +30,27 @@ export default class RouterList extends Component{
 			<Router
         history={browserHistory}
       >
-        <Route path="/" component={App}>
+        <Route path="/" 
+         onEnter={(...args) => {
+          requireAuth(...args)
+        }}
+        component={App} breadcrumbName="home">
           <IndexRedirect to="/todo" />
-          <Route path='todo'  component={Todo} />
-          <Route path="*" component={NotFound} />
+          <Route path='todo'  getComponent={(location, cb) => {
+            require.ensure([], require => {
+              cb(null, require('./pages/todo/').default)
+            })
+          }} breadcrumbName="todo"/>
+          <Route path='login'  getComponent={(location, cb) => {
+            require.ensure([], require => {
+              cb(null, require('./pages/login/').default)
+            })
+          }}/>
+          <Route path="*" getComponent={(location, cb) => {
+            require.ensure([], require => {
+              cb(null, require('./pages/notFound/').default)
+            })
+          }} breadcrumbName="404"/>
         </Route>
       </Router>
 		)

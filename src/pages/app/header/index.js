@@ -1,30 +1,64 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import { Link, browserHistory } from 'react-router'
-
-import Icon from 'public/components/Icon'
+import { Layout, Icon } from 'antd'
+import auth from 'src/utils/auth'
 import './index.less'
 
-class Header extends Component {
+const { Header } = Layout;
+
+class Head extends Component {
+
+  handleLogout = e => {
+    e.preventDefault()
+
+    auth.destroy()
+    browserHistory.push({
+      pathname: '/login',
+      state: {
+        referrer: this.props.location.pathname
+      }
+    })
+  }
+
+  handleLogin = e => {
+    auth.destroy()
+    browserHistory.push({
+      pathname: '/login',
+      state: {
+        referrer: this.props.location.pathname
+      }
+    })
+  }
 
   render() {
     return (
-      <div className="header clear-float" >
+      <Header className="header clear-float" >
         <div className='left' >
           <Link to="/" className="header__logo">
-            SYSTEM NAME
+            SYSTEM PROJECT
           </Link>
         </div>
-        <div className="header__right right" >
-         	<a href="https://github.com/NARUTOne" target='_blank'><Icon type='github' /></a>
+        <div className="header__nav left">
+          {/*<ul>
+            <li className='header-nav-list'>
+              <Link to='/'>首页</Link> 
+            </li>
+          </ul>*/}
         </div>
-      </div>
+        <div className="header__right right" >
+         	{auth.user ? 
+           <span>{auth.user.userName} &nbsp; <span className="ant-divider" /> &nbsp; <Icon type='logout' onClick={this.handleLogout}/></span>:
+           <Icon type='login' onClick={this.handleLogin}/> }&nbsp; <span className="ant-divider" /> &nbsp;
+           <a href='https://github.com/NARUTOne'><Icon type='github' /></a>
+        </div>
+      </Header>
     )
   }
 }
 
-Header.propTypes = {
-  
+Head.propTypes = {
+  location: PropTypes.object.isRequired
 }
 
-export default Header
+export default Head
